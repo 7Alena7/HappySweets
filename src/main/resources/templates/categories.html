@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/CategoriesPageStyles.css">
+    <title>Categories</title>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40" alt="Logo"/>
+        </a>
+        <button class="navbar-toggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-links">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin}" href="#">Admin Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="content-container">
+    <a th:href="@{/admin/categories/add}" class="btn-primary">Add Category</a>
+    <table class="category-table">
+        <thead class="table-header">
+        <tr>
+            <th>SN</th>
+            <th>Category Name</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category, iStat : ${categories}">
+            <th th:text="${iStat.index + 1}">1</th>
+            <td th:text="${category.name}">Category Name</td>
+            <td><a th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn-danger">Delete</a></td>
+            <td><a th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn-warning">Update</a></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

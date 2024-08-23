@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminHome</title>
+    <link rel="stylesheet" href="/css/AdminHomeStyles.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40" class="logo" alt=""/>
+        </a>
+        <div class="navbar-links">
+            <a class="nav-link" th:href="@{/admin}" href="#">admin-home</a>
+            <a class="nav-link" th:href="@{/logout}" href="#">logout</a>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron">
+    <h1>Welcome back</h1>
+    <p>Easily manage your data</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <h4 class="card-title">Categories</h4>
+                <p class="card-text">Manage the categories section here.</p>
+                <a href="#" th:href="@{/admin/categories}" class="card-link">Manage</a>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <h4 class="card-title">Products</h4>
+                <p class="card-text">Manage all the products here.</p>
+                <a href="#" th:href="@{/admin/products}" class="card-link">Manage</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

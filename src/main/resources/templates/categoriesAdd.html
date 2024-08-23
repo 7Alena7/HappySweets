@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/AddCategoryPageStyles.css">
+    <title>Add Category</title>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40" alt="Logo"/>
+        </a>
+        <button class="navbar-toggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-links">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin}" href="#">Admin Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="form-container">
+    <form th:action="@{/admin/categories/add}" method="post" th:object="${category}">
+        <input type="hidden" name="id" th:field="*{id}">
+        <div class="form-group">
+            <label for="name">Category Name</label>
+            <input type="text" class="input-field" required th:field="*{name}" name="name" id="name" placeholder="Enter name">
+        </div>
+        <button type="submit" class="btn-submit">Submit</button>
+    </form>
+</main>
+</body>
+</html>

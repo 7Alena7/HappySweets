@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Product</title>
+    <link rel="stylesheet" href="/css/ViewProductStyles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-logo" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" height="40" alt="Logo">
+        </a>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggle-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-left">
+                <!-- Empty space for layout alignment -->
+            </ul>
+            <ul class="navbar-right">
+                <li class="navbar-item active">
+                    <a class="navbar-link" th:href="@{/}" href="#">Home</a>
+                </li>
+                <li class="navbar-item active">
+                    <a class="navbar-link" th:href="@{/shop}" href="#">Shop</a>
+                </li>
+                <li class="navbar-item active">
+                    <a class="navbar-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
+                </li>
+                <li class="navbar-item active">
+                    <a class="navbar-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
+                </li>
+                <li class="navbar-item active">
+                    <a class="navbar-link" th:href="@{/cart}" href="#">Cart</a>
+                </li>
+                <li class="navbar-item active">
+                    <span class="cart-count" th:text="${cartCount}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="product-container container mt-5">
+    <div class="product-row row">
+        <div class="product-image-container col-sm-5 d-flex justify-content-center">
+            <img class="product-image mt-5" height="300px" width="300px" th:src="@{${'/productImages/' + product.imageName}}" alt="${product.name}">
+        </div>
+        <div class="product-details-container col-sm-7 mt-5">
+            <h2 class="product-name" th:text="${product.name}"></h2>
+            <p class="product-category" th:text="${product.category.name}"></p>
+            <h2 class="product-price">$<span th:text="${product.price}"></span></h2>
+            <h5 class="product-weight">Weight: <span th:text="${product.weight}"></span> grams</h5>
+            <p class="product-description" th:text="${product.description}"></p>
+            <a href="#" th:href="@{/addToCart/{id}(id=${product.id})}" class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

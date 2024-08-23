@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/CheckoutPageStyles.css"> <!-- Link to your CSS file -->
+    <title>Checkout</title>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40" alt="Logo"/>
+        </a>
+        <button class="navbar-toggler">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-links">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/shop}" href="#">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/cart}" href="#">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link" th:text="${cartCount}">0</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="checkout-container">
+
+    <section class="checkout-section">
+
+        <div class="checkout-content">
+
+            <div class="billing-details">
+
+                <div class="billing-card">
+                    <div class="billing-card-body">
+
+                        <h5 class="billing-title">Billing Details</h5>
+
+                        <div class="billing-form-row">
+
+                            <div class="billing-form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" required class="input-field">
+                            </div>
+
+                            <div class="billing-form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" required class="input-field">
+                            </div>
+
+                        </div>
+
+                        <div class="country-info">
+                            <label>Country - <strong>USA</strong></label>
+                        </div>
+
+                        <div class="address-info">
+                            <label for="address1">Address (Line 1)</label>
+                            <input type="text" required id="address1" placeholder="House number and street name" class="input-field">
+                        </div>
+
+                        <div class="address-info">
+                            <label for="address2">Address (Line 2)</label>
+                            <input type="text" id="address2" placeholder="Apartment, suite, unit etc. (optional)" class="input-field">
+                        </div>
+
+                        <div class="postcode-info">
+                            <label for="postcode">Postcode / ZIP</label>
+                            <input type="text" maxlength="6" minlength="6" required id="postcode" class="input-field">
+                        </div>
+
+                        <div class="city-info">
+                            <label for="city">Town / City</label>
+                            <input type="text" required id="city" class="input-field">
+                        </div>
+
+                        <div class="phone-info">
+                            <label for="phone">Phone</label>
+                            <input type="number" minlength="10" maxlength="10" required id="phone" class="input-field">
+                        </div>
+
+                        <div class="email-info">
+                            <label for="email">Email Address</label>
+                            <input type="email" required id="email" class="input-field">
+                        </div>
+
+                        <div class="additional-info">
+                            <label for="additional">Additional Information</label>
+                            <textarea id="additional" class="textarea-field" rows="4"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="order-summary">
+
+                <div class="order-card">
+                    <div class="order-card-body">
+
+                        <h5 class="order-title">The Total Amount</h5>
+
+                        <ul class="order-list">
+                            <li class="order-item">
+                                Amount Payable
+                                <span>$<span th:text="${total}"></span></span>
+                            </li>
+                            <li class="order-item">
+                                Shipping
+                                <span>Not invented yet</span>
+                            </li>
+                            <li class="order-item">
+                                <div>
+                                    <strong>The total amount of</strong>
+                                    <p class="order-amount mb-0"></p>
+                                </div>
+                                <span><strong>$<span th:text="${total}"></span></strong></span>
+                            </li>
+                        </ul>
+
+                        <form action="" method="post" th:action="@{/payNow}">
+                            <button type="submit" class="btn-submit">Pay Now</button>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="discount-card">
+                    <div class="discount-card-body">
+
+                        <a class="toggle-discount" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Add a discount code (optional)
+                            <span class="toggle-icon"><i class="fas fa-chevron-down pt-1"></i></span>
+                        </a>
+
+                        <div class="collapse" id="collapseExample">
+                            <div class="discount-form">
+                                <div class="discount-input">
+                                    <input type="text" id="discount-code" class="input-field" placeholder="Enter discount code">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+</body>
+</html>

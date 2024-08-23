@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/CartStyles.css"> <!-- Link to your CSS file -->
+    <title>Cart</title>
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40" alt="Logo"/>
+        </a>
+        <div class="navbar-links">
+            <a class="navbar-link" th:href="@{/}" href="#">Home</a>
+            <a class="navbar-link" th:href="@{/shop}" href="#">Shop</a>
+            <a class="navbar-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
+            <a class="navbar-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
+            <a class="navbar-link" th:href="@{/cart}" href="#">Cart</a>
+            <span class="cart-count" th:text="${cartCount}">0</span>
+        </div>
+    </div>
+</nav>
+<main>
+    <div class="main-container">
+
+        <section class="cart-section">
+
+            <div class="cart-content">
+
+                <div class="cart-items">
+
+                    <!-- Cart Item Card -->
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+
+                            <h5>Cart (<span th:text="${cartCount}">2</span> items)</h5>
+
+                            <div class="cart-item-row" th:each="item, iStat : ${cart}">
+                                <div class="cart-item-image">
+                                    <img th:src="@{${'/productImages/' + item.imageName}}" alt="Product image">
+                                </div>
+                                <div class="cart-item-info">
+                                    <h5 th:text="${item.name}"></h5>
+                                    <p>Weight: <span th:text="${item.weight}"></span> grams</p>
+                                    <a href="#!" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}" class="remove-item-link">Remove item</a>
+                                    <p class="item-price">$<span th:text="${item.price}"></span></p>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <p class="cart-notice">Do not delay the purchase, adding items to your cart does not mean booking them.</p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="cart-summary">
+
+                    <!-- Summary Card -->
+                    <div class="summary-card">
+                        <h5>The total amount</h5>
+
+                        <ul class="summary-list">
+                            <li>Amount Payable: <span>$<span th:text="${total}"></span></span></li>
+                            <li>Shipping: <span>Is not available</span></li>
+                            <li>Total: <strong>$<span th:text="${total}"></span></strong></li>
+                        </ul>
+
+                        <a th:href="@{/checkout}" class="checkout-button">Go to Checkout</a>
+
+                    </div>
+
+                    <!-- Discount Card -->
+                    <div class="discount-card">
+                        <a href="#collapseExample" data-toggle="collapse">Add a discount code (optional)</a>
+                        <div class="collapse" id="collapseExample">
+                            <input type="text" id="discount-code" placeholder="Enter discount code">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>

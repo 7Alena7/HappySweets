@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="/css/ProductsStyles.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-logo" href="#">
+            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" height="40" alt="Logo">
+        </a>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggle-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-left">
+                <!-- Left-aligned empty space for layout -->
+            </ul>
+            <ul class="navbar-right">
+                <li class="navbar-item active">
+                    <a class="navbar-link" th:href="@{/admin}" href="#">Admin Home</a>
+                </li>
+                <li class="navbar-item active">
+                    <a class="navbar-link" th:href="@{/logout}" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="content-container">
+    <a th:href="@{/admin/products/add}" class="button primary-button" style="margin: 20px 0">Add Product</a>
+    <table class="product-table">
+        <thead class="table-header">
+        <tr>
+            <th class="table-column">SN</th>
+            <th class="table-column">Product Name</th>
+            <th class="table-column">Category</th>
+            <th class="table-column">Preview</th>
+            <th class="table-column">Delete</th>
+            <th class="table-column">Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, iStat : ${products}">
+            <th class="table-cell" th:text="${iStat.index + 1}">1</th>
+            <td class="table-cell" th:text="${product.name}">ProductName</td>
+            <td class="table-cell" th:text="${product.category.name}">Category</td>
+            <td class="table-cell">
+                <img class="product-image" src="" height="100px" width="100px" th:src="@{${'/productImages/' + product.imageName}}">
+            </td>
+            <td class="table-cell">
+                <a href="" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="button danger-button">Delete</a>
+            </td>
+            <td class="table-cell">
+                <a href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="button warning-button">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
