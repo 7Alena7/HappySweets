@@ -40,7 +40,7 @@ public class SecurityConfig{
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/shop/**", "/register", "/css/**").permitAll()
+                        .requestMatchers("/", "/shop/**", "/register", "/css/**", "/resources/**", "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 ).formLogin(form -> form

@@ -4,88 +4,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/CartStyles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/css/Styles.css">
     <title>Cart</title>
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cart section */
+        .cart {
+            flex: 2; /* Take up twice the space compared to the summary */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-right: 20px; /* Space between cart and summary */
+            overflow-y: auto; /* Scroll if content overflows */
+            height: 600px; /* Set a fixed height for the cart section */
+        }
+
+        /* Cart item card styling */
+        .cart-item-card {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image in the cart item */
+        .cart-item-image img {
+            width: 50%;
+            height: auto;
+            margin-right: 10px;
+            padding-left: 40px;
+        }
+        /* Cart item info */
+        .cart-item-info {
+            flex: 1;
+            text-align: center;
+            padding-right: 50px;
+            align-items: center;
+        }
+        /* Cart summary section */
+        .cart-summary {
+            flex: 1; /* Take up less space compared to the cart */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Summary list styling */
+        .summary-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Summary list item styling */
+        .summary-list li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="navbar-container">
-        <a class="navbar-brand" href="#">
-            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="40" alt="Logo"/>
+        <a th:href="@{/shop}" class="navbar-logo">
+            <img src="/images/logo.png" alt="Logo" class="logo-img"/>
         </a>
-        <div class="navbar-links">
-            <a class="navbar-link" th:href="@{/}" href="#">Home</a>
-            <a class="navbar-link" th:href="@{/shop}" href="#">Shop</a>
-            <a class="navbar-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
-            <a class="navbar-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
-            <a class="navbar-link" th:href="@{/cart}" href="#">Cart</a>
-            <span class="cart-count" th:text="${cartCount}">0</span>
+        <div class="navbar-menu">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/shop}">shop</a></li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">login</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="isAuthenticated()"
+                                        th:href="@{/logout}">logout</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/cart}">cart</a></li>
+                <li class="nav-item"><span class="nav-link" th:text="${cartCount}">0</span></li>
+            </ul>
         </div>
     </div>
 </nav>
-<main>
-    <div class="main-container">
-
-        <section class="cart-section">
-
-            <div class="cart-content">
-
-                <div class="cart-items">
-
-                    <!-- Cart Item Card -->
-                    <div class="cart-item">
-                        <div class="cart-item-details">
-
-                            <h5>Cart (<span th:text="${cartCount}">2</span> items)</h5>
-
-                            <div class="cart-item-row" th:each="item, iStat : ${cart}">
-                                <div class="cart-item-image">
-                                    <img th:src="@{${'/productImages/' + item.imageName}}" alt="Product image">
-                                </div>
-                                <div class="cart-item-info">
-                                    <h5 th:text="${item.name}"></h5>
-                                    <p>Weight: <span th:text="${item.weight}"></span> grams</p>
-                                    <a href="#!" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}" class="remove-item-link">Remove item</a>
-                                    <p class="item-price">$<span th:text="${item.price}"></span></p>
-                                </div>
-                            </div>
-                            <hr>
-
-                            <p class="cart-notice">Do not delay the purchase, adding items to your cart does not mean booking them.</p>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="cart-summary">
-
-                    <!-- Summary Card -->
-                    <div class="summary-card">
-                        <h5>The total amount</h5>
-
-                        <ul class="summary-list">
-                            <li>Amount Payable: <span>$<span th:text="${total}"></span></span></li>
-                            <li>Shipping: <span>Is not available</span></li>
-                            <li>Total: <strong>$<span th:text="${total}"></span></strong></li>
-                        </ul>
-
-                        <a th:href="@{/checkout}" class="checkout-button">Go to Checkout</a>
-
-                    </div>
-
-                    <!-- Discount Card -->
-                    <div class="discount-card">
-                        <a href="#collapseExample" data-toggle="collapse">Add a discount code (optional)</a>
-                        <div class="collapse" id="collapseExample">
-                            <input type="text" id="discount-code" placeholder="Enter discount code">
-                        </div>
-                    </div>
-                </div>
-
+<div class="main-container">
+    <div class="cart">
+        <h1>Cart (<span th:text="${cartCount}">2</span> items)</h1>
+        <div class="cart-item-card" th:each="item, iStat : ${cart}">
+            <div class="cart-item-image">
+                <img th:src="@{${'/productImages/' + item.imageName}}" alt="Product image">
             </div>
-        </section>
+            <div class="cart-item-info">
+                <p th:text="${item.name}"></p>
+                <p>Weight: <span th:text="${item.weight}"></span> grams</p>
+                <p>$<span th:text="${item.price}"></span></p>
+               <a class="link" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">Remove item</a>
+            </div>
+        </div>
     </div>
-</main>
+
+
+    <div class="cart-summary">
+        <h1>Total amount</h1>
+        <ul class="summary-list">
+            <li>Total: <strong>$<span th:text="${total}"></span></strong></li>
+        </ul>
+        <a th:href="@{/checkout}" class="button">Go to Checkout</a>
+    </div>
+</div>
 </body>
 </html>

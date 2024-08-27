@@ -4,35 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
-    <link rel="stylesheet" href="/css/ProductsStyles.css">
+    <link rel="stylesheet" href="/css/Styles.css">
+    <style>
+        .content-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-bottom: 20px; /* Adds space between the button and the table */
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-header {
+            background-color: darkred;
+            color: #fff;
+            text-align: left;
+        }
+        .table-header th {
+            padding: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-
 <nav class="navbar">
     <div class="navbar-container">
-        <a class="navbar-logo" href="#">
-            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" height="40" alt="Logo">
+        <a th:href="@{/shop}" class="navbar-logo">
+            <img src="/images/logo.png" alt="Logo" class="logo-img"/>
         </a>
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggle-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-left">
-                <!-- Left-aligned empty space for layout -->
-            </ul>
-            <ul class="navbar-right">
-                <li class="navbar-item active">
-                    <a class="navbar-link" th:href="@{/admin}" href="#">Admin Home</a>
-                </li>
-                <li class="navbar-item active">
-                    <a class="navbar-link" th:href="@{/logout}" href="#">Logout</a>
-                </li>
+        <div class="navbar-menu">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin}">admin-home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
 <div class="content-container">
     <a th:href="@{/admin/products/add}" class="button primary-button" style="margin: 20px 0">Add Product</a>
     <table class="product-table">

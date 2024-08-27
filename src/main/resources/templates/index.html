@@ -3,29 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/IndexStyles.css">
+    <link rel="stylesheet" href="/css/Styles.css">
     <title>Index</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        .container {
+            margin: 30px auto;
+            max-width: 800px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .bottom-container{
+            margin: 30px auto;
+            max-width: 1000px;
+            background-color: #fbfaf9;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .mySlides {
+            width: 80%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: rosybrown;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 3px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .prev {
+            left: 30%;
+        }
+
+        .next {
+            right: 30%;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background-color: #f8f9fa;
+        }
+
+        .caption-container {
+            text-align: center;
+            background-color: rgba(255, 235, 230, 0.8);
+            padding: 5px 20px;
+            color: rosybrown;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .column {
+            width: 16.66%;
+            padding: 0 5px;
+        }
+
+        .demo {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+
+        .table-container {
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        table, th, td {
+            border: 1px solid white;
+            border-collapse: collapse;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        .hoursTable, .contactTable {
+            background-color: rgba(255, 235, 230, 0.8);
+            width: 100%;
+            color: #333333;
+            table-layout: fixed;
+        }
+
+        .hoursTable th, .hoursTable td {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .contactTable th, .contactTable td {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: 0;
+            border-top: 1px solid #ddd;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="navbar-container">
-        <a class="navbar-logo" href="#">
-            <img src="../static/images/logo.png" alt="Logo" class="logo-img"/>
+        <a th:href="@{/shop}" class="navbar-logo">
+            <img src="/images/logo.png" alt="Logo" class="logo-img"/>
         </a>
-        <button class="navbar-toggle" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="toggle-icon"></span>
-        </button>
-        <div class="navbar-menu" id="navbar-menu">
+        <div class="navbar-menu">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#">home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">shop</a></li>
-                <li class="nav-item"><a class="nav-link" sec:authorize="isAnonymous()" href="#">login</a></li>
-                <li class="nav-item"><a class="nav-link" sec:authorize="isAuthenticated()" href="#">logout</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">cart</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/shop}">shop</a></li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">login</a></li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">logout</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/cart}">cart</a></li>
                 <li class="nav-item"><span class="nav-link" th:text="${cartCount}">0</span></li>
             </ul>
         </div>
     </div>
 </nav>
+<h1>Welcome to Happy Sweets</h1>
+<p>Find your sweet happiness here</p>
+
+<div class="container">
+    <div class="mySlides">
+        <img src="/productImages/BerryCake.png" style="width:50%">
+    </div>
+
+    <div class="mySlides">
+        <img src="/productImages/Buket.png" style="width:50%">
+    </div>
+
+    <div class="mySlides">
+        <img src="/productImages/KittyCake.png" style="width:50%">
+    </div>
+
+    <div class="mySlides">
+        <img src="/productImages/RoundCake.png" style="width:50%">
+    </div>
+
+    <div class="mySlides">
+        <img src="/productImages/SeptemberCake.png" style="width:50%">
+    </div>
+
+    <div class="mySlides">
+        <img src="/productImages/SeptemberFirst.png" style="width:50%">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+    <div class="caption-container">
+        <p id="caption"></p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <img class="demo cursor" src="/productImages/BerryCake.png" style="width:50%" onclick="currentSlide(1)" alt="Berry Cake">
+        </div>
+        <div class="column">
+            <img class="demo cursor" src="/productImages/Buket.png" style="width:50%" onclick="currentSlide(2)" alt="Marshmallow Bouquet">
+        </div>
+        <div class="column">
+            <img class="demo cursor" src="/productImages/KittyCake.png" style="width:50%" onclick="currentSlide(3)" alt="Kitty Cake">
+        </div>
+        <div class="column">
+            <img class="demo cursor" src="/productImages/RoundCake.png" style="width:50%" onclick="currentSlide(4)" alt="Round Cake">
+        </div>
+        <div class="column">
+            <img class="demo cursor" src="/productImages/SeptemberCake.png" style="width:50%" onclick="currentSlide(5)" alt="September Cake">
+        </div>
+        <div class="column">
+            <img class="demo cursor" src="/productImages/SeptemberFirst.png" style="width:50%" onclick="currentSlide(6)" alt="September First Cake">
+        </div>
+    </div>
+</div>
+
+<div class="bottom-container">
+<p>Contact Information</p>
+<div class="table-container">
+    <table class="contactTable">
+        <tr>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Telegram</th>
+        </tr>
+        <tr>
+            <td>Sunny Street</td>
+            <td>Sweet@gmail.com</td>
+            <td>SweetDreams</td>
+        </tr>
+    </table>
+</div>
+
+<p>Hours of Operation</p>
+<div class="table-container">
+    <table class="hoursTable">
+        <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+        <tr>
+            <td>Closed</td>
+            <td>8am-5pm</td>
+            <td>8am-5pm</td>
+            <td>8am-5pm</td>
+            <td>8am-5pm</td>
+            <td>8am-7pm</td>
+            <td>8am-7pm</td>
+        </tr>
+    </table>
+</div>
+</div>
+
+
+<hr>
+<p><i>“Everyone smiles in the same language.” — George Carlin</i></p>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        captionText.innerHTML = dots[slideIndex-1].alt;
+    }
+</script>
 </body>
 </html>

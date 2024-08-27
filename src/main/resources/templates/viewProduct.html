@@ -5,62 +5,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Product</title>
-    <link rel="stylesheet" href="/css/ViewProductStyles.css">
+    <link rel="stylesheet" href="/css/Styles.css">
 </head>
-<body>
+<style>
+    .product-container {
+        margin: 30px auto;
+        max-width: 800px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+    }
 
+    .product-container:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .product-details-container {
+        width: 100%;
+    }
+
+    .product-name {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .product-category {
+        font-size: 16px;
+        color: #777;
+        margin-bottom: 15px;
+    }
+
+    .product-price {
+        font-size: 24px;
+        color: lch(50% 18.88 21.62);
+        margin-bottom: 15px;
+    }
+
+    .product-weight {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .product-description {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 25px;
+    }
+</style>
+<body>
 <nav class="navbar">
     <div class="navbar-container">
-        <a class="navbar-logo" href="#">
-            <img th:src="@{/images/logo.png}" src="../static/images/logo.png" height="40" alt="Logo">
+        <a th:href="@{/shop}" class="navbar-logo">
+            <img src="/images/logo.png" alt="Logo" class="logo-img"/>
         </a>
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggle-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-left">
-                <!-- Empty space for layout alignment -->
-            </ul>
-            <ul class="navbar-right">
-                <li class="navbar-item active">
-                    <a class="navbar-link" th:href="@{/}" href="#">Home</a>
-                </li>
-                <li class="navbar-item active">
-                    <a class="navbar-link" th:href="@{/shop}" href="#">Shop</a>
-                </li>
-                <li class="navbar-item active">
-                    <a class="navbar-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">Login</a>
-                </li>
-                <li class="navbar-item active">
-                    <a class="navbar-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">Logout</a>
-                </li>
-                <li class="navbar-item active">
-                    <a class="navbar-link" th:href="@{/cart}" href="#">Cart</a>
-                </li>
-                <li class="navbar-item active">
-                    <span class="cart-count" th:text="${cartCount}"></span>
-                </li>
+        <div class="navbar-menu">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/shop}">Shop</a></li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/cart}">Cart</a></li>
+                <li class="nav-item"><span class="nav-link" th:text="${cartCount}">0</span></li>
             </ul>
         </div>
     </div>
 </nav>
-
-<div class="product-container container mt-5">
-    <div class="product-row row">
-        <div class="product-image-container col-sm-5 d-flex justify-content-center">
-            <img class="product-image mt-5" height="300px" width="300px" th:src="@{${'/productImages/' + product.imageName}}" alt="${product.name}">
+<div class="product-container">
+        <div class="product-image">
+            <img height="300px" width="300px" th:src="@{${'/productImages/' + product.imageName}}" alt="${product.name}">
         </div>
-        <div class="product-details-container col-sm-7 mt-5">
-            <h2 class="product-name" th:text="${product.name}"></h2>
+        <div class="product-details-container">
+            <h1 class="product-name" th:text="${product.name}"></h1>
             <p class="product-category" th:text="${product.category.name}"></p>
-            <h2 class="product-price">$<span th:text="${product.price}"></span></h2>
-            <h5 class="product-weight">Weight: <span th:text="${product.weight}"></span> grams</h5>
+            <p class="product-price">$<span th:text="${product.price}"></span></p>
+            <p class="product-weight">Weight: <span th:text="${product.weight}"></span> grams</p>
             <p class="product-description" th:text="${product.description}"></p>
-            <a href="#" th:href="@{/addToCart/{id}(id=${product.id})}" class="btn btn-primary">Add to Cart</a>
+            <a class="button" th:href="@{/addToCart/{id}(id=${product.id})}" >Add to Cart</a>
         </div>
-    </div>
 </div>
-
 </body>
 </html>
