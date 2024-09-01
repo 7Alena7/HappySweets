@@ -86,7 +86,8 @@
         </thead>
         <tbody>
         <tr th:each="category, iStat : ${categories}">
-            <th th:text="${iStat.index + 1}">1</th>
+            <th th:text="${iStat.index + 1}">1</th> <!--Since iStat.index is zero-based, adding 1 makes it one-based,
+            meaning the first item will have an index of 1, the second item an index of 2, and so on.-->
             <td th:text="${category.name}">Category Name</td>
             <td><a th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="button">Delete</a></td>
             <td><a th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="button">Update</a></td>
