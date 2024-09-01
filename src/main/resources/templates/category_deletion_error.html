@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Deletion Error</title>
+    <link rel="stylesheet" href="/css/Styles.css">
+    <style>
+        body{
+            text-align: center;
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .link {
+            font-size: 30px;
+            color: #888888;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color:red;">  Category Deletion Error</h1>
+<p style="color:red;">Unable to delete the category because it is associated with existing products.</p>
+<a class="link" th:href="@{/admin/categories}">Click here to go back to categories</a><br><br>
+<a class="link" th:href="@{/admin/products}">Click here if you want to delete products first</a>
+</body>
+</html>
