@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 //Controller class for all outside of /admin operations
 @Controller
@@ -27,6 +29,7 @@ public class HomeController {
     }
     @GetMapping({"/","/home"})//Curly braces in the @GetMapping annotation with multiple URL patterns is a way to handle different paths with the same method
     public String home(Model model){
+        model.addAttribute("products", productService.getAllProduct());
         model.addAttribute("cartCount", GlobalData.cart.size());
         return "index";
     }
