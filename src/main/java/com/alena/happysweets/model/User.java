@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import java.util.List;
-
+//User Model
 @Entity
 @Data
 @Table(name = "users")

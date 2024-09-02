@@ -92,8 +92,8 @@
         <div class="product-details-container">
             <h1 class="product-name" th:text="${product.name}"></h1>
             <p class="product-category" th:text="${product.category.name}"></p>
-            <p class="product-price">$<span th:text="${product.price}"></span></p>
-            <p class="product-weight">Weight: <span th:text="${product.weight}"></span> grams</p>
+            <p class="product-price" th:text="${#numbers.formatCurrency(product.price)}"></p>
+            <p class="product-weight">Weight: <span th:text="${#numbers.formatInteger(product.weight, 3, 'POINT')}"></span> g</p>
             <p class="product-description" th:text="${product.description}"></p>
             <a class="button" th:href="@{/addToCart/{id}(id=${product.id})}" >Add to Cart</a>
         </div>

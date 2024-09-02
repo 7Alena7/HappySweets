@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+//Controller class for login operations
 @Controller
 public class LoginController {
     Logger logger = LoggerFactory.getLogger(LoginController.class);

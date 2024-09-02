@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+//Implementation of all the product methods
 @Service
 public class ProductService {
     ProductRepository productRepository;

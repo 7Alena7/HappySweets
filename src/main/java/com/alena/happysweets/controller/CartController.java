@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
+import static com.alena.happysweets.global.GlobalData.cart;
+//Controller class for cart operations
 @Controller
 public class CartController {
     Logger logger = LoggerFactory.getLogger(CartController.class);
@@ -24,28 +26,34 @@ public class CartController {
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable int id){
         Optional<Product> product = productService.getProductById(id);
-        product.ifPresent(value -> GlobalData.cart.add(value));
+        product.ifPresent(value -> cart.add(value));
         logger.info("product has been added to cart");
         return"redirect:/shop";
     }
     @GetMapping("/cart")
     public String cartGet(Model model){
-        model.addAttribute("cartCount", GlobalData.cart.size());
-        model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
-        model.addAttribute("cart", GlobalData.cart);
+        model.addAttribute("cartCount", cart.size());
+        model.addAttribute("total", cart.stream().mapToDouble(Product::getPrice).sum());
+        model.addAttribute("cart", cart);
         logger.debug("cartCount, total, cart models have been updated");
         return "cart";
     }
     @GetMapping("/cart/removeItem/{index}")
     public String cartItemRemove(@PathVariable int index){
-        GlobalData.cart.remove(index);
+        cart.remove(index);
         logger.info("Product has been removed from the cart");
         return "redirect:/cart";
     }
     @GetMapping("/checkout")
     public String checkout(Model model){
-        model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
+        model.addAttribute("total", cart.stream().mapToDouble(Product::getPrice).sum());
         logger.debug("total model has been updated");
         return "checkout";
+    }
+    @GetMapping("/funny_pay")
+    public String payGet(Model model){
+        cart.clear();
+        model.addAttribute("cartCount", 0);
+        return "funny_pay";
     }
 }

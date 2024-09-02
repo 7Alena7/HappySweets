@@ -2,7 +2,7 @@ package com.alena.happysweets.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
+//Product Model
 @Entity
 @Data
 @Table(name = "products")

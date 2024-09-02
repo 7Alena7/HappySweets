@@ -100,8 +100,8 @@
             </div>
             <div class="cart-item-info">
                 <p th:text="${item.name}"></p>
-                <p>Weight: <span th:text="${item.weight}"></span> grams</p>
-                <p>$<span th:text="${item.price}"></span></p>
+                <p>Weight: <span th:text="${#numbers.formatInteger(item.weight, 3, 'POINT')}"></span> g</p>
+                <p th:text="${#numbers.formatCurrency(item.price)}"></p>
                <a class="link" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">Remove item</a>
             </div>
         </div>
@@ -109,7 +109,7 @@
     <div class="cart-summary">
         <h1>Total amount</h1>
         <ul class="summary-list">
-            <li>Total: <strong>$<span th:text="${total}"></span></strong></li>
+            <li>Total: <strong th:text="${#numbers.formatCurrency(total)}"></strong></li>
         </ul>
         <a th:href="@{/checkout}" class="button">Go to Checkout</a>
     </div>

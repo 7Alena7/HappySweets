@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import java.util.List;
+//Role model
 @Entity
 @Data
 @Table(name = "roles")

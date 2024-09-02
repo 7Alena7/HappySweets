@@ -79,10 +79,10 @@
                 <img class="product-image" src="" height="100px" width="100px" th:src="@{${'/productImages/' + product.imageName}}">
             </td>
             <td class="table-cell">
-                <a href="" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="button danger-button">Delete</a>
+                <a href="" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="button">Delete</a>
             </td>
             <td class="table-cell">
-                <a href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="button warning-button">Update</a>
+                <a href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="button">Update</a>
             </td>
         </tr>
         </tbody>

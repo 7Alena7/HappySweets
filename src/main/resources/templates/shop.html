@@ -128,7 +128,7 @@
             </div>
             <div class="card-body">
                 <h5 class="product-title" th:text="${product.name}"></h5>
-                <h4 class="product-price">$<span th:text="${product.price}"></span></h4>
+                <h4 class="product-price" th:text="${#numbers.formatCurrency(product.price)}"></h4>
                 <p class="product-description" th:text="${product.description}"></p>
                 <a class="button" th:href="@{/shop/viewProduct/{id}(id=${product.id})}">View Product</a>
             </div>

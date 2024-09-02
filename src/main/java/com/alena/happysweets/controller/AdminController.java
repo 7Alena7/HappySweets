@@ -20,11 +20,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-
+//Controller class for admin operations
 @Controller
 public class AdminController {
    Logger logger = LoggerFactory.getLogger(AdminController.class);
-    public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
+    public static final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
     /*System.getProperty("user.dir"):
     This method call retrieves the current working directory of the Java application.
     "user.dir" is a system property that points to the directory from which the Java application was launched.*/

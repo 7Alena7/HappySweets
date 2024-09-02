@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+//Implementations of all the category methods
 @Service
 public class CategoryService {
     CategoryRepository categoryRepository;

@@ -14,7 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 import static org.springframework.security.config.Customizer.withDefaults;
-
+//Security Configuration class
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{

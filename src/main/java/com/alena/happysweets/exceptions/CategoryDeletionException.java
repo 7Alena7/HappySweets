@@ -1,5 +1,5 @@
 package com.alena.happysweets.exceptions;
-
+//Category deletion Exception will be thrown when admin tries to delete the category that is not empty
 public class CategoryDeletionException extends RuntimeException{
     /*This constructor allows
     to specify a custom error message when the exception is thrown.*/

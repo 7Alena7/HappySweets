@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
-
+//Controller class for all outside of /admin operations
 @Controller
 public class HomeController {
     Logger logger = LoggerFactory.getLogger(HomeController.class);

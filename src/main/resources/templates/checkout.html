@@ -158,12 +158,10 @@
                     <strong>The total amount of</strong>
                     <p class="order-amount mb-0"></p>
                 </div>
-                <span><strong>$<span th:text="${total}"></span></strong></span>
+                <span><strong th:text="${#numbers.formatCurrency(total)}"></strong></span>
             </li>
         </ul>
-        <form action="" method="post" th:action="@{/payNow}">
-            <button type="submit" class="button">Pay Now</button>
-        </form>
+        <a class="button" th:href="@{/funny_pay}">Pay now</a>
     </div>
 </div>
 </body>
