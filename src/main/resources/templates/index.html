@@ -177,7 +177,7 @@
 
 <div class ="slideshow-container">
     <p style="font-style: italic; font-size: x-large">Check out our most popular products:</p>
-<div class="mySlides" th:each="product : ${products}">
+<div class="mySlides" th:each="product : ${topFourProducts}">
     <div class="img-slider">
         <a th:href="@{/shop/viewProduct/{id}(id=${product.id})}">
         <img  th:src="@{${'/productImages/' + product.imageName}}" style="width:50%" alt="${product.name}"></a>
@@ -192,7 +192,7 @@
 
 
     <div class="row">
-        <div class="column" th:each="product, iterStat : ${products}">
+        <div class="column" th:each="product, iterStat : ${topFourProducts}">
             <img style="width:70%"
                  th:src="@{${'/productImages/' + product.imageName}}"
                  th:alt="${product.name}">

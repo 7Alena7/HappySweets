@@ -30,4 +30,7 @@ public class ProductService {
     public List<Product> getAllProductsByCategoryId(int id){
         return productRepository.findAllByCategoryId(id);
     }
+    public List<Product> getTopFourExpensiveProducts(){
+        return productRepository.findTopFourExpensiveProducts();
+    }
 }

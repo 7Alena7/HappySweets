@@ -29,7 +29,7 @@ public class HomeController {
     }
     @GetMapping({"/","/home"})//Curly braces in the @GetMapping annotation with multiple URL patterns is a way to handle different paths with the same method
     public String home(Model model){
-        model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("topFourProducts", productService.getTopFourExpensiveProducts());
         model.addAttribute("cartCount", GlobalData.cart.size());
         return "index";
     }

@@ -2,6 +2,8 @@ package com.alena.happysweets.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 //Product Model
 @Entity
 @Data

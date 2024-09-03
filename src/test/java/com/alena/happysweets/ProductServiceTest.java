@@ -1,5 +1,6 @@
 package com.alena.happysweets;
 
+
 import com.alena.happysweets.model.Product;
 import com.alena.happysweets.repository.ProductRepository;
 import com.alena.happysweets.service.ProductService;
@@ -97,4 +98,47 @@ public class ProductServiceTest {
         assertEquals(2, result.size());
         verify(productRepository, times(1)).findAllByCategoryId(categoryId);
     }
+//GetTopFourMostExpensiveProducts made with custom query test
+    @Test
+    public void testGetTopFourMostExpensiveProducts() {
+        List<Product> products = getProducts();
+
+        when(productRepository.findTopFourExpensiveProducts()).thenReturn(products);
+
+        List<Product> topProducts = productService.getTopFourExpensiveProducts();
+
+        assertEquals(4, topProducts.size());
+        assertEquals("Product 2", topProducts.get(0).getName());
+        assertEquals("Product 1", topProducts.get(1).getName());
+        assertEquals("Product 3", topProducts.get(2).getName());
+        assertEquals("Product 4", topProducts.get(3).getName());
+
+        verify(productRepository, times(1)).findTopFourExpensiveProducts();
+    }
+
+    private static List<Product> getProducts() {
+        Product product1 = new Product();
+        product1.setName("Product 1");
+        product1.setPrice(25);
+
+        Product product2 = new Product();
+        product2.setName("Product 2");
+        product2.setPrice(30);
+
+        Product product3 = new Product();
+        product3.setName("Product 3");
+        product3.setPrice(15);
+
+        Product product4 = new Product();
+        product4.setName("Product 4");
+        product4.setPrice(13);
+
+        Product product5 = new Product();
+        product5.setName("Product 5");
+        product5.setPrice(5);
+
+        List<Product> products = Arrays.asList(product2, product1, product3, product4);
+        return products;
+    }
+
 }
