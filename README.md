@@ -20,6 +20,6 @@ Another interesting feature is the home page gallery.
 It takes 4 of the most expensive products from the database and displays their pictures. 
 Pictures also contain links that lead to product cards, that allow to add product to a cart.
 
-The database schema: ![DataBase Schema](../static/images/DataBase.png)
+The database schema: ![DataBase Schema](../images/DataBase.png)
 
 
