@@ -1,6 +1,7 @@
 package com.alena.happysweets;
 
 
+import com.alena.happysweets.dto.ProductDTO;
 import com.alena.happysweets.model.Product;
 import com.alena.happysweets.repository.ProductRepository;
 import com.alena.happysweets.service.ProductService;
@@ -140,5 +141,50 @@ public class ProductServiceTest {
         List<Product> products = Arrays.asList(product2, product1, product3, product4);
         return products;
     }
+    @Test
+    void testGetProductsWithLowPriceWeightRatio() {
+        Product product1 = new Product();
+        product1.setName("Product 1");
+        product1.setPrice(10.00);
+        product1.setWeight(5.00);
 
+        Product product2 = new Product();
+        product2.setName("Product 2");
+        product2.setPrice(6.50);
+        product2.setWeight(4.00);
+
+        List<Product> mockProducts = Arrays.asList(product1, product2);
+        when(productRepository.findLowPriceWeightRatio()).thenReturn(mockProducts);
+
+        List<ProductDTO> result = productService.getProductsWithLowPriceWeightRatio();
+
+        assertEquals(2, result.size());
+        assertEquals("Product 1", result.get(0).getName());
+        assertEquals("2.000", result.get(0).getPriceWeightRatio());
+        assertEquals("Product 2", result.get(1).getName());
+        assertEquals("1.625", result.get(1).getPriceWeightRatio());
+    }
+    @Test
+    void testGetProductsWithHighPriceWeightRatio() {
+        Product product1 = new Product();
+        product1.setName("Product 3");
+        product1.setPrice(50.00);
+        product1.setWeight(2.00);
+
+        Product product2 = new Product();
+        product2.setName("Product 4");
+        product2.setPrice(20.00);
+        product2.setWeight(1.00);
+
+        List<Product> mockProducts = Arrays.asList(product1, product2);
+        when(productRepository.findHighPriceWeightRatio()).thenReturn(mockProducts);
+
+        List<ProductDTO> result = productService.getProductsWithHighPriceWeightRatio();
+
+        assertEquals(2, result.size());
+        assertEquals("Product 3", result.get(0).getName());
+        assertEquals("25.000", result.get(0).getPriceWeightRatio());
+        assertEquals("Product 4", result.get(1).getName());
+        assertEquals("20.000", result.get(1).getPriceWeightRatio());
+    }
 }

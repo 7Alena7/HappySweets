@@ -23,15 +23,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding:20px;
         }
-
         .row {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            max-width: 900px;
             gap: 20px;
+            flex-wrap: wrap;
         }
         .card {
             background-color: #fff;
@@ -69,6 +68,26 @@
         .card-link:hover {
             background-color: #e9ecef;
         }
+        .product-table {
+            width: 40%;
+            text-align: center;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-header {
+            background-color: darkred;
+            color: #fff;
+            text-align: left;
+        }
+        .table-header th {
+            padding: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -89,8 +108,30 @@
     <h1>Welcome Admin</h1>
     <p>Let's manage those sweets:)</p>
 </div>
+
 <div class="container">
     <div class="row">
+        <div class="card">
+            <div class="table">
+                <h4 class="card-title">Pay attention: these products have low Weight/Price Ratio</h4>
+                <table class="product-table">
+                    <thead class="table-header">
+                    <tr>
+                        <th class="table-column">SN</th>
+                        <th class="table-column">Product Name</th>
+                        <th class="table-column">Weight/Price Ratio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="productDTO, iStat : ${LowProfitProducts}">
+                        <th class="table-cell" th:text="${iStat.index + 1}">1</th>
+                        <td class="table-cell" th:text="${productDTO.name}">ProductName</td>
+                        <td class="table-cell" th:text="${productDTO.priceWeightRatio}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="card">
             <h4 class="card-title">Categories</h4>
             <p class="card-text">To manage categories click here</p>
@@ -100,6 +141,27 @@
             <h4 class="card-title">Products</h4>
             <p class="card-text">To manage products click here</p>
             <a class="card-link" th:href="@{/admin/products}">Manage</a>
+        </div>
+        <div class="card">
+            <div class="table">
+                <h4 class="card-title">Pay attention: these products have high Weight/Price Ratio</h4>
+                <table class="product-table">
+                    <thead class="table-header">
+                    <tr>
+                        <th class="table-column">SN</th>
+                        <th class="table-column">Product Name</th>
+                        <th class="table-column">Weight/Price Ratio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="productDTO, iStat : ${MightBeTooExpensiveProducts}">
+                        <th class="table-cell" th:text="${iStat.index + 1}">1</th>
+                        <td class="table-cell" th:text="${productDTO.name}">ProductName</td>
+                        <td class="table-cell" th:text="${productDTO.priceWeightRatio}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

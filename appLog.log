@@ -1,0 +1,9 @@
+2024-09-03 04:05:51,623 [INFO] com.alena.happysweets.controller.AdminController [http-nio-8080-exec-7] All the categories had been pulled from the database
+2024-09-03 04:06:13,747 [INFO] com.alena.happysweets.controller.HomeController [http-nio-8080-exec-7] product is shown by id
+2024-09-03 04:06:26,678 [INFO] com.alena.happysweets.controller.HomeController [http-nio-8080-exec-6] product is shown by id
+2024-09-03 04:06:27,903 [INFO] com.alena.happysweets.controller.CartController [http-nio-8080-exec-10] product has been added to cart
+2024-09-03 04:06:28,671 [INFO] com.alena.happysweets.controller.HomeController [http-nio-8080-exec-10] product is shown by id
+2024-09-03 04:06:29,422 [INFO] com.alena.happysweets.controller.CartController [http-nio-8080-exec-5] product has been added to cart
+2024-09-03 04:24:54,992 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-03 04:24:54,996 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-09-03 04:24:55,004 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.

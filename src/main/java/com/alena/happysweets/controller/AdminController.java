@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 //Controller class for admin operations
@@ -36,7 +37,9 @@ public class AdminController {
         this.productService = productService;
     }
     @GetMapping("/admin") //Mapping HTTP Get request to this method
-    public String getAdminHome(){ //Method returns String(Which is typically a name for a html page). adminHome - just a method name(can be anything, as it does not affect the functionality).
+    public String getAdminHome(Model model){ //Method returns String(Which is typically a name for a html page). adminHome - just a method name(can be anything, as it does not affect the functionality).
+        model.addAttribute("LowProfitProducts", productService.getProductsWithLowPriceWeightRatio());
+        model.addAttribute("MightBeTooExpensiveProducts", productService.getProductsWithHighPriceWeightRatio());
         return "admin_home"; //Spring will look for a template file named admin_home.html (or another format like .jsp or .ftl depending on configuration)
     }
     @GetMapping("/admin/categories")//When a user visits the URL /admin/categories, this method is triggered

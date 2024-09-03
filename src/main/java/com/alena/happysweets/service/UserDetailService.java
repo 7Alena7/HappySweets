@@ -13,7 +13,6 @@ import java.util.Optional;
 //Implementation of all the UserRepository Methods
 @Service
 public class UserDetailService implements UserDetailsService {
-
     UserRepository userRepository;
     @Autowired
     public UserDetailService(UserRepository userRepository){
