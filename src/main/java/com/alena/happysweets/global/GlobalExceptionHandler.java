@@ -7,19 +7,17 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ControllerAdvice //This annotation makes the class a global exception handler.
+@ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(CategoryDeletionException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)//sets the HTTP status code to 400 (Bad Request)
-    public String handleCategoryDeletionException(CategoryDeletionException ex){
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleCategoryDeletionException(CategoryDeletionException ex) {
         return "category_deletion_error";
     }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleResourceNotFoundException(ResourceNotFoundException ex) {
         return "404";
     }
-
-
-
 }

@@ -1,11 +1,8 @@
 package com.alena.happysweets.dto;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-//DTO class to separate product related data transfer concerns from business logic concerns
 @Data
 @NoArgsConstructor
 public class ProductDTO {

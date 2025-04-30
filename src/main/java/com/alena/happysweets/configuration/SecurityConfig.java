@@ -12,40 +12,42 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 import static org.springframework.security.config.Customizer.withDefaults;
-//Security Configuration class
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
-   UserDetailService userDetailService; //service that provides user details for authentication
+public class SecurityConfig {
+    UserDetailService userDetailService;
+
     @Autowired
-   public SecurityConfig(UserDetailService userDetailService){
-       this.userDetailService = userDetailService;
-   }
-   /*BCryptPasswordEncoder is a password encoder that uses
-   bcrypt hashing to securely store and verify passwords.*/
-   @Bean
-   public static BCryptPasswordEncoder bCryptpasswordEncoder() {
-       return new BCryptPasswordEncoder();
-   }
-   @Bean
-   public HttpSessionEventPublisher httpSessionPublisher(){
-       return new HttpSessionEventPublisher();
-   }
-   @Bean
-   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityConfig(UserDetailService userDetailService) {
+        this.userDetailService = userDetailService;
+    }
+
+
+    @Bean
+    public static BCryptPasswordEncoder bCryptpasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionPublisher() {
+        return new HttpSessionEventPublisher();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/shop/**", "/register", "/css/**", "/resources/**", "/images/**", "/static/**", "/productImages/**","/js/**").permitAll()
+                        .requestMatchers("/", "/shop/**", "/register", "/css/**", "/resources/**", "/images/**", "/static/**", "/productImages/**", "/js/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 ).formLogin(form -> form
-                .loginPage("/login").permitAll()
-                                .failureUrl("/login?error=true")
-                                .defaultSuccessUrl("/")
-                                .usernameParameter("email")
-                                .passwordParameter("password")
+                        .loginPage("/login").permitAll()
+                        .failureUrl("/login?error=true")
+                        .defaultSuccessUrl("/")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
                 ).logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login")
@@ -60,4 +62,3 @@ public class SecurityConfig{
         return http.build();
     }
 }
-

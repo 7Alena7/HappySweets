@@ -1,11 +1,22 @@
 package com.alena.happysweets.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.*;
+import lombok.Data;
+
 import java.util.List;
-//User Model
+
 @Entity
 @Data
 @Table(name = "users")
@@ -23,14 +34,6 @@ public class User {
     private String email;
     @NotEmpty
     private String password;
-    //@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    /*CascadeType.ALL: Any operation (save, delete, update, etc.) performed on the User entity
-    will also be applied to its associated Role entities.
-    FetchType.EAGER: When a User entity is retrieved from the database,
-    its associated Role entities will be fetched immediately.*/
-    //@JoinTable(name = "user_role",
-            //joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            //inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -38,7 +41,6 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles;
 
-    //A copy constructor that creates a new User object based on an existing one.
     public User(User user) {
         this.id = user.getId();
         this.firstName = user.getFirstName();
@@ -47,6 +49,7 @@ public class User {
         this.password = user.getPassword();
         this.roles = user.getRoles();
     }
-    public User(){
+
+    public User() {
     }
 }

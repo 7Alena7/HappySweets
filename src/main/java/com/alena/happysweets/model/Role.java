@@ -1,9 +1,17 @@
 package com.alena.happysweets.model;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.*;
+import lombok.Data;
+
 import java.util.List;
-//Role model
+
 @Entity
 @Data
 @Table(name = "roles")
@@ -15,5 +23,5 @@ public class Role {
     @NotEmpty
     private String name;
     @ManyToMany(mappedBy = "roles")
-    private List<User>users;
+    private List<User> users;
 }
